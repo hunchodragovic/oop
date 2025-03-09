@@ -1,29 +1,47 @@
-class Employee {
-  #salary;
-  constructor(name, salary) {
-    this.name = name;
-    this.#salary = salary;
+class Vehicle {
+  constructor(brand, speed) {
+    this.brand = brand;
+    this.speed = speed;
   }
 
-  getSalary() {
-    return "Access Denied";
-  }
-  increaseSalary(amount) {
-    this.#salary += amount;
-  }
-  decreaseSalary(amount) {
-    this.#salary -= amount;
-  }
-  getEmployeeInfo() {
-    return `Name: ${this.name}, Salary: ${this.#salary}`;
+  describe() {
+    console.log(`This is a ${this.brand} with a speed of ${this.speed} km/h`);
   }
 }
-const emp1 = new Employee("John", 10000);
-emp1.increaseSalary(-1500);
-console.log(emp1.getSalary()); // 11000
-emp1.decreaseSalary(-1500);
-console.log(emp1.getSalary()); // 10000
-emp1.increaseSalary(1000);
-emp1.increaseSalary(1000);
-console.log(emp1.getSalary()); // 1000
-console.log(emp1.getEmployeeInfo()); // Name: John, Salary: 10000
+class Car extends Vehicle {
+  constructor(brand, speed, wheels) {
+    super(brand, speed);
+    this.wheels = wheels;
+  }
+
+  describe() {
+    super.describe();
+    console.log(`This car has ${this.wheels} wheels`);
+  }
+  boostSpeed() {
+    this.speed += 20;
+    console.log(`The speed is now ${this.speed} km/h`);
+  }
+}
+class Bike extends Vehicle {
+  constructor(brand, speed, type) {
+    super(brand, speed);
+    this.type = type;
+  }
+
+  describe() {
+    super.describe();
+    console.log(`This bike is a ${this.type}`);
+  }
+  ringBell() {
+    console.log("Ring ring!");
+  }
+}
+const myCar = new Car("Toyota", 100, "4");
+myCar.describe(); // "This is a Toyota vehicle moving at 100 km/h."
+myCar.boostSpeed();
+myCar.describe(); // "This is a Toyota vehicle moving at 120 km/h."
+
+const myBike = new Bike("BMX", 15, "2wheels");
+myBike.describe(); // "This is a BMX vehicle moving at 15 km/h."
+myBike.ringBell(); // "Ring Ring! 🚲"
